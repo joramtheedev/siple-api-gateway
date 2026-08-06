@@ -1,8 +1,17 @@
 package main
 
 import (
+	"log"
 	"net/http"
 )
+
+func wsHandler(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrade(r, w)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+}
 
 func main() {
 	//Initialize the api Gateway
