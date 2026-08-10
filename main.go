@@ -13,6 +13,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
 	//Handle websocket messages and keep the connection alive
 	for {
 		messageType, message, err := conn.ReadMessage()
@@ -33,6 +34,14 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		} else if messageType == websocket.CloseMessage {
 			break
 		}
+	}
+}
+
+func broadcastMessage(message []byte) {
+	//get a list of all connected clients
+	clients := getConnectedClients()
+	for _, clientConn := range clients {
+		clientConn.writeMessage(websocket.TextMessage, message)
 	}
 }
 
