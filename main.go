@@ -7,6 +7,15 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+func main() {
+	//initialize the API Gateway
+	apiGateway := openapi.NewAPIGateway()
+
+	//define a new endpoint for WebSockets
+	wsEndpoint := http.Path("/ws")
+	apiGateway.SetEndpoint(wsEndpoint, wsHandler)
+}
+
 func wsHandler(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrade(r, w)
 	if err != nil {
