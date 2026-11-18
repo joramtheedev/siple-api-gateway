@@ -38,3 +38,7 @@ func New(routes []config.Route, apiKey string) (http.Handler, error) {
 
 	return logging(requireAPIKey(apiKey, mux)), nil
 }
+
+func requireAPIKey(apiKey string, mux *http.ServeMux) http.Handler {
+	panic("unimplemented")
+}
