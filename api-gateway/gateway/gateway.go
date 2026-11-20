@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"time"
 
 	"simple-gateway/config"
 )
@@ -36,7 +37,7 @@ func New(routes []config.Route, apiKey string) (http.Handler, error) {
 		w.Write([]byte("ok"))
 	})
 
-	return logging(requireAPIKey(apiKey, mux)), nil
+	return logging(rateLimit(60, time.Minute, requireAPIKey(apiKey, mux))), nil
 }
 
 func requireAPIKey(apiKey string, mux *http.ServeMux) http.Handler {
