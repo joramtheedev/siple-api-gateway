@@ -1,0 +1,4 @@
+[
+  { "prefix": "/users",  "targets": ["http://localhost:9001", "http://localhost:9003"] },
+  { "prefix": "/orders", "targets": ["http://localhost:9002"] }
+]

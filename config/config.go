@@ -7,8 +7,8 @@ import (
 
 // Route maps a public path prefix (e.g. "/users") to a backend service URL.
 type Route struct {
-	Prefix string `json:"prefix"`
-	Target string `json:"target"`
+	Prefix  string   `json:"prefix"`
+	Targets []string `json:"targets"`
 }
 
 // Load reads routes from a JSON file.
